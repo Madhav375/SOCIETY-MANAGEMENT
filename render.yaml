@@ -1,0 +1,23 @@
+# Optional Render Blueprint. Secrets are entered in the Render dashboard (sync: false).
+services:
+  - type: web
+    name: smart-society-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: PGSSL
+        value: "true"
+      - key: FRONTEND_URL
+        sync: false   # e.g. https://smart-society.vercel.app
+      - key: MONGODB_URI
+        sync: false   # MongoDB Atlas connection string
+      - key: DATABASE_URL
+        sync: false   # hosted PostgreSQL connection string
